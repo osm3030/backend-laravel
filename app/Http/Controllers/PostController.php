@@ -12,21 +12,14 @@ class PostController extends Controller
 {
     public function allPost(Request $request)
     { 
-
         $jwt = substr($request->header('Authorization', 'token <token>'), 7);
 
-        try {
-            
+        try {            
             JWT::decode($jwt, new Key(env('JWT_SECRET'), 'HS256'));
-
-            $payload = JWT::decode($jwt, new Key(env('JWT_SECRET'), 'HS256'));
-            
+            $payload = JWT::decode($jwt, new Key(env('JWT_SECRET'), 'HS256'));            
             $payloadA = (array) $payload;
-
             if($payloadA[0]->rol_id == 1 || $payloadA[0]->rol_id == 2 || $payloadA[0]->rol_id == 3) {
-
             $post = Post::all()->toArray();
-
                 return response()->json(
                     [
                     'code' => 200,
@@ -60,21 +53,13 @@ class PostController extends Controller
 
     public function findPostId(Request $request, $id)
     { 
-
         $jwt = substr($request->header('Authorization', 'token <token>'), 7);
-
-        try {
-            
+        try {           
             JWT::decode($jwt, new Key(env('JWT_SECRET'), 'HS256'));
-
-            $payload = JWT::decode($jwt, new Key(env('JWT_SECRET'), 'HS256'));
-            
+            $payload = JWT::decode($jwt, new Key(env('JWT_SECRET'), 'HS256'));            
             $payloadA = (array) $payload;
-
             if($payloadA[0]->rol_id == 1 || $payloadA[0]->rol_id == 2 || $payloadA[0]->rol_id == 3) {
-
             $post = Post::find($id);
-
                 return response()->json(
                     [
                     'code' => 200,
@@ -93,9 +78,7 @@ class PostController extends Controller
             } 
 
         } catch (\Exception $th) {
-
             $error = $th->getMessage();
-
             return response()->json(
                 [
                 'code' => 500,
@@ -108,31 +91,22 @@ class PostController extends Controller
 
     public function store(Request $request )
     {
-
         $jwt = substr($request->header('Authorization', 'token <token>'), 7);
 
-        try {
-            
+        try {           
             JWT::decode($jwt, new Key(env('JWT_SECRET'), 'HS256'));
-
-            $payload = JWT::decode($jwt, new Key(env('JWT_SECRET'), 'HS256'));
-            
+            $payload = JWT::decode($jwt, new Key(env('JWT_SECRET'), 'HS256'));           
             $payloadA = (array) $payload;
-
             if($payloadA[0]->rol_id == 2 ) {
-
             Post::create($request->all());
-
             $post = $request->all();
-
                 return response()->json(
                     [
                     'code' => 201,
                     'status' => 'ok',
                     'data' => $post
                     ]
-                    );
-            
+                    );           
             }else{
                 return response()->json(
                     [
@@ -143,9 +117,7 @@ class PostController extends Controller
             } 
 
         } catch (\Exception $th) {
-
             $error = $th->getMessage();
-
             return response()->json(
                 [
                 'code' => 500,
@@ -158,23 +130,15 @@ class PostController extends Controller
 
     public function update(Request $request, $id)
     {
-
         $jwt = substr($request->header('Authorization', 'token <token>'), 7);
 
         try {
-
             JWT::decode($jwt, new Key(env('JWT_SECRET'), 'HS256'));
-
-            $payload = JWT::decode($jwt, new Key(env('JWT_SECRET'), 'HS256'));
-            
+            $payload = JWT::decode($jwt, new Key(env('JWT_SECRET'), 'HS256'));          
             $payloadA = (array) $payload;
-
-            if($payloadA[0]->rol_id == 1 || $payloadA[0]->rol_id == 2) {
-            
+            if($payloadA[0]->rol_id == 1 || $payloadA[0]->rol_id == 2) {           
             $post = Post::find($id);
-
             $post->update($request->all());
-
                 return response()->json(
                     [
                     'code' => 201,
@@ -182,7 +146,6 @@ class PostController extends Controller
                     'data' => $post,
                     ]
                     );
-
             }else{
                 return response()->json(
                     [
@@ -193,9 +156,7 @@ class PostController extends Controller
             }
 
         } catch (\Exception $th) {
-
             $error = $th->getMessage();
-
             return response()->json(
                 [
                 'code' => 500,
@@ -208,23 +169,15 @@ class PostController extends Controller
 
     public function destroy(Request $request, $id)
     {
-
         $jwt = substr($request->header('Authorization', 'token <token>'), 7);
 
-        try {
-         
+        try {        
             JWT::decode($jwt, new Key(env('JWT_SECRET'), 'HS256'));
-
-            $payload = JWT::decode($jwt, new Key(env('JWT_SECRET'), 'HS256'));
-            
+            $payload = JWT::decode($jwt, new Key(env('JWT_SECRET'), 'HS256'));            
             $payloadA = (array) $payload;
-
             if($payloadA[0]->rol_id == 1 || $payloadA[0]->rol_id == 2) {
-
-            $post = Post::find($id);
-        
-            $post->delete();
-            
+            $post = Post::find($id);        
+            $post->delete();            
                 return response()->json(
                     [
                     'code' => 204,
@@ -241,10 +194,8 @@ class PostController extends Controller
                 );
             } 
 
-        } catch (\Exception $th) {
-            
+        } catch (\Exception $th) {           
             $error = $th->getMessage();
-
             return response()->json(
                 [
                 'code' => 500,
