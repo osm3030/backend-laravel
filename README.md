@@ -65,7 +65,7 @@ DB_PORT=3306
 
 ## Rutas
 
-# Categories:
+## Categories:
 
 Consultar categorías
 - Get:  _api/category_  
@@ -83,7 +83,7 @@ Eliminar una categoría por id
 - Delete:  _api/category/{id}/destroy_  
 
 ---------------------------------
-# Posts:
+## Posts:
 
 Consultar posts
 - Get: _api/post_  
@@ -101,7 +101,7 @@ Eliminar un post por id
 - Delete: _api/post/{id}/destroy_  
 
 ---------------------------------
-# Users
+## Users
 
 Crear un nuevo usuario
 - Post: _user/store_   
